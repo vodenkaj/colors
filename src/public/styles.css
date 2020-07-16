@@ -1,0 +1,691 @@
+/* || GENERAL STYLES */
+* {
+	font-family: 'Roboto';
+	box-sizing: border-box;
+}
+
+body{
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	position: absolute;
+}
+
+header {
+	position: relative;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	box-shadow: 0px 1px 1px 0px rgba(41,41,41,.25);
+	max-height: 50px;
+	z-index: 5;
+	color: #5A6B69;
+}
+
+.main-header {
+	position: sticky;
+	background: white;
+	top: 0;
+	left: 0;
+}
+
+pre {
+    color: #666;
+    page-break-inside: avoid;
+    font-family: monospace;
+    font-size: 15px;
+    max-width: 100%;
+    overflow: auto;
+    word-wrap: break-word;
+    margin: 0;
+    padding: 0 0 0 10px;
+    border-left: 3px solid #3792CB;
+}
+
+header a {
+	margin-left: 10px;
+	cursor: pointer;
+	color: #5A6B69;
+	text-decoration: none;
+}
+
+header li {
+	display: inline-block;
+	padding: 0 10px;
+}
+
+.error {
+	display: block;
+	text-align: center;
+	font-size: 35px;
+}
+
+/* || MAIN PAGE */
+.main-container {
+	position: fixed;
+	display: flex;
+	width: 100%;
+	height: 100%;
+	justify-content: center;
+
+}
+
+.left-side {
+	position: relative;
+	text-align: center;
+	height: 100%;
+	width: 75%;
+}
+
+.left-side .holder{
+	position: relative;
+	top: 50%;
+	left: 50%;
+	display: block;
+	text-align: center;
+	transform: translate(-50%, -50%);
+}
+
+.holder h1, .page-title h1 {
+	padding: 0 20%;
+	font-size: 60px;
+}
+
+.holder h2, .page-title h2 {
+	color: #5A6B69;
+	font-weight: 400;
+}
+
+.holder a {
+	display: block;
+	width: 200px;
+	margin: 2% auto;
+	text-decoration: none;
+}
+
+.right-side {
+	position: relative;
+	height: 100%;
+	width: 100%;
+	background: blue;
+}
+
+/* || PALLETES PAGE */
+
+.page-title {
+	display: block;
+	text-align: center;
+}
+
+.page-title h1 {
+	padding: 0;
+}
+
+.pallete-container, .popup-container {
+	position: absolute;
+	max-width: 100%;
+	height: 100%;
+	display: flex;
+	padding: 25px;
+	vertical-align: baseline;
+	align-content: flex-start;
+	flex-wrap: wrap;
+}
+
+.pallete {
+	position: relative;
+	margin: 15px;
+	display: flex;
+	border-radius: 10px;
+	height: 170px;
+	width: 340px;
+	color: #5A6B69;
+	box-shadow: 0px 1px 1px 1px rgba(41,41,41,.2);
+}
+
+.pallete-split {
+	overflow: hidden;
+	height: 100%;
+	display: flex;
+	width: 100%;
+	transition: all 0.1s ease-in-out;
+	align-items: center;
+
+}
+
+.pallete-split a {
+	visibility: hidden;
+	position: relative;
+	font-weight: 900;
+	bottom: 10%;
+	margin: auto;
+}
+
+.pallete-split:hover {
+	width: 200%;
+}
+
+.pallete-split:hover a {
+	visibility: visible;
+}
+
+.downloads {
+	position: absolute;
+	width: 100%;
+	height: 30px;
+	background: white;
+	bottom: 0;
+
+}
+
+.downloads i {
+	padding-left: 10px;
+}
+
+#info { 
+	font-size: 25px;
+	margin: 0 10px;
+	padding: 0;
+	float: right;
+}
+
+#info:before {
+	font-family: 'fontawesome';
+	content: '\f141';
+}
+
+.pallete-container a {
+	align-content: center;
+	text-align: center;
+
+}
+
+.pallete-container a:hover .content {
+	visibility: visible;
+	opacity:1;
+	clear: both;
+}
+
+.content {
+	z-index: 100;
+	position: absolute;
+	bottom: 35px;
+	width: 200px;
+	height: 150px;
+	visibility: hidden;
+	background: white;
+	opacity: 0;
+	transition: 0.1s;
+	border-style: solid;
+	border-width: 0.5px;
+	border-radius: 10px;
+	border-color: rgba(0,0,0,0.3);
+	transform: translate(-50%, 0);
+}
+
+.pallete-container a .content ul {
+	font-size: 15px;
+	padding: 0;
+	margin: 10px;
+	list-style-type: none;
+	text-align: center;
+	cursor: pointer;
+}
+.content li {
+	margin: 5px;
+}
+
+.shadow-splitter {
+	height: 5px;
+	box-shadow: 0px -1px 1px -1px rgba(41,41,41,.4);
+}
+
+#open-generator:before {
+	content: '\f0d0';
+	font-family: 'fontawesome';
+}
+
+.pallete-container a .content:after {
+	content: '';
+	box-shadow: 2px 2px 0px 0px rgba(41,41,41,.2);
+	position: absolute;
+	width: 25px;
+	height: 25px;
+	background: white;
+	bottom: -10px;
+	left: 100px;
+	transform: rotate(45deg);
+}
+
+/* || NAV-BAR FOR GENERATOR PAGE */
+
+.tools{
+	list-style: none;
+}
+
+.tools i.icon-holder:before {
+	padding: 10px;
+	font-family: 'fontawesome';
+	content: '\f019';
+}
+
+.tools span, i {
+	pointer-events: none;
+	font-style: normal;
+}
+
+.tools a#save:before {
+	padding: 10px;
+	font-family: 'fontawesome';
+	content: '\f02e';
+}
+
+.tools button {
+	border: none;
+	background: none;
+}
+
+.tools li button {
+	cursor: pointer;
+	transition: all 0.3s ease 0s;
+}
+
+.tools a:hover {
+	color: #9BC9E5;
+}
+
+.tools a:active {
+	color: #3792CB;
+}
+
+/* || BODY */
+
+.picker-container, .pop-up-container{
+	position: fixed;
+	width: 100%;
+	height: calc(100% - 100px);
+	display: flex;
+}
+
+.split {
+	position: relative;
+	height: 100%;
+	z-index: 1;
+}
+
+.split:hover .button-container{
+	display: flex;
+}
+
+/* || SHADES INSIDE SPLITS */
+
+.shades-div {
+	display: flex;	
+	flex-flow: column wrap;
+	height: 100%;
+	visibility: hidden; 
+}
+
+.shades-splits {
+	display: flex;
+	flex: 1;
+	cursor: pointer;
+	z-index: 3;
+	overflow: auto;
+	align-items: center;
+	justify-content: center;
+}
+
+
+.shade-hex {
+	pointer-events: none;
+	visibility: hidden;
+	line-height:50px;
+}
+
+.shades-splits:hover .shade-hex{
+	visibility: visible;
+}
+
+
+/* || UTILLITIES FOR SPLITS */
+
+.options, .button-container {
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	left: 50%;
+	bottom: 10px;
+	margin: 0;
+	transform: translate(-50%, -50%);
+}
+
+.button-container {
+	display: none;
+}
+
+.button-container > button {
+	margin-bottom: calc(10px + .5vw);
+}
+
+.options a {
+	font-size: calc(20px + .5vw);
+}
+
+.side-div {
+	position: absolute;
+	height: 100%;
+	width: 10%;
+	bottom: 0;
+}
+
+.right {
+	right: 0%;
+}
+
+.add-color.right {
+	left: 100%;
+}
+
+.side-div.left:hover ~.add-color.left, .add-color:hover{
+	visibility: visible;
+}
+
+.side-div.right:hover ~.add-color.right, .add-color:hover{
+	visibility: visible;
+}
+
+.add-color::before {
+	content: '\f055';
+}
+
+.add-color {
+	position: absolute;
+	bottom: 50%;
+	cursor: pointer;
+	width: 50px;
+	height: 35px;
+	font-family: 'fontawesome';
+	border: 0;
+	background: none;
+	font-size: calc(20px + .5vw);
+	visibility: hidden;
+	transform: translate(-50%, -50%);
+}
+
+.lock::before{
+	content: '\f09c';
+}
+
+.lock.locked:before {
+	content: '\f023';
+}
+
+.shades:before {
+	content: '\f009';
+}
+
+.remove:before {
+	content: '\f056';	
+}
+
+.lock, .shades, .remove {
+	font-family: 'fontawesome';
+	border: 0;
+	height: 35px;
+	width: 50px;
+	font-size: calc(20px + .5vw);
+	background: none;
+	cursor: pointer;
+	color: inherit;
+}
+
+/* || MODALS */
+
+.modal-container, .nav-modal-container {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	z-index: 5;
+	left: 0;
+	top: 0;
+	margin: 0;
+	border: 0;
+	background-color: rgba(0,0,0,0.5);
+	visibility: hidden;
+}
+
+.bg-modal {
+	display: flex;
+	align-items: center;
+	height: 100%;
+	width: 100%;
+	font-size: 100%;
+	margin: auto;
+}
+
+#close:before{
+	font-family: 'fontawesome';
+	content: '\f00d';
+	font-size: 25px;
+	text-decoration: none;
+}
+
+.export-content, .download-content, .registration-form, .login-form, .save-pallete{
+	margin: auto;
+	visibility: hidden;
+	width: 400px;
+	height: 400px;
+	background-color: white;
+	border-radius: 10px;
+	position: relative;
+	display: none;
+	flex-direction: column;
+}
+
+.registration-form form, .login-form form, .save-pallete form{
+	display: flex;
+	flex-direction: column;
+	-moz-appearance: none;
+	gap: 10px;
+	height: 100%;
+	justify-content: space-around;
+}
+
+input {
+	padding: 15px;
+}
+
+input[type=submit] {
+	border-radius: 10px;
+	background: #3792CB;
+	color: white;
+	cursor: pointer;
+	border: 0;
+}
+
+.form-container {
+	margin: 20px;
+	height: 210px;
+}
+
+#close {
+	position: absolute;
+	z-index: 100;
+	border: 0;
+	background: 0;
+	cursor: pointer;
+	top: 2px;
+	left: 0;
+}
+
+.registration-form .modal-header, .login-form .modal-header {
+	display: block;
+	margin: 10px;
+	font-size: 30px;
+	box-shadow: none;
+	height: 100px;
+}
+
+
+.registration-form a, .login-form a {
+	cursor: initial;
+}
+
+.modal-header {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	text-align: center;
+	height: 50px;
+	box-shadow: 0px 1px 1px -1px rgba(41,41,41,.9);
+}
+
+.login-form .footer, .registration-form .footer, .save-pallete .footer {
+	color: black;
+	justify-content: center;
+	flex-direction: column;
+	left: 0;
+}
+
+.modal-header span{
+	font-weight: 900;
+	display: inline-block;
+}
+
+.modal-header a {
+	font-size: 20px;
+	display: block;
+}
+
+.methods-container {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.methods-container a {
+	margin: 5% auto;
+	font-family: 'fontawesome';
+	font-size: 50px;
+	display: flex;
+	text-align: center;
+	cursor: pointer;
+	flex-direction: column;
+	color: #5A6B69;
+	text-decoration: none;
+}
+
+.methods-container a:hover {
+	color: #9BC9E5;
+}
+
+.methods-container a:active {
+	color: #3792CB;
+}
+
+.methods-container i {
+	font-size: 20px;
+	font-style: normal;
+}
+
+#css-export:before {
+	content: '\f13c';
+}
+
+#image-export:before {
+	content: '\f1c5';
+}
+
+#ase-export:before {
+	content: '\f1c9';
+}
+
+#svg-export:before {
+	content: '\f15c';
+}
+
+.registration-form {
+	height: 525px;
+}
+
+.registration-form .form-container {
+	height: 350px;
+}
+
+.download-content {
+	height: 500px;
+}
+
+.code-container{
+	border: 1;
+	border-style: solid;
+	border-width: 0.5px;
+	border-color: rgba(0,0,0,0.1);
+	margin: 20px;
+	background: #f4f4f4;
+}
+
+.css-content {
+	display: block;
+	overflow: auto;
+	max-height: 320px;
+	
+}
+
+.black-white-button{
+	color: #5A6B69;
+	border-style: solid;
+	text-align: center;
+	width: 125px;
+	height: 50px;
+	text-decoration: none;
+	line-height: 50px;
+	border-width: 0.5px;
+	border-radius: 10px;
+	border-color: rgba(0,0,0,0.3);
+	font-weight: 900;
+	cursor: pointer;
+	transition: all 0.3s ease 0s;
+}
+
+.black-white-button.colored {
+	background: #3792CB;
+	color: white;
+	border: 0;
+}
+
+#download-css, #copy-css, #download-image{
+	color: #5A6B69;
+	border-style: solid;
+	text-align: center;
+	width: 125px;
+	height: 50px;
+	text-decoration: none;
+	line-height: 50px;
+	border-width: 0.5px;
+	border-radius: 10px;
+	border-color: rgba(0,0,0,0.3);
+	font-weight: 900;
+	cursor: pointer;
+	transition: all 0.3s ease 0s;
+}
+
+#download-css:hover, #copy-css:hover {
+	border-color: rgba(0,0,0,0.5);
+}
+
+#login, #register, #reset {
+	color: #3792CB;
+	cursor: pointer;
+}
+
+.footer {
+	text-align: center;
+	bottom: 0;
+	width: 100%;
+	display: flex;
+	justify-content: space;
+	padding: 20px;
+	color: white;
+	box-shadow: 0px -1px 1px -1px rgba(41,41,41,.9);
+}
