@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const routes = require('../routes');
 const config = require('../config');
 const session = require('express-session')
@@ -8,6 +9,7 @@ module.exports = (app) => {
 	app.get('/status', (req, res) => { res.status(200).end(); });
 	app.head('/status', (req, res) => { res.status(200).end(); });
 	app.enable('trust proxy');
+	app.set('views', path.join(__dirname + '\\..\\', 'views'));
 
 	app.use(session({
 		name: 'sid',
