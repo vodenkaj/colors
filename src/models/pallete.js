@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 
 const palleteSchema = mongoose.Schema({
-	colors: [[String, String]]
+	colors: [[String, String]],
+	creator: String
 });
 
 

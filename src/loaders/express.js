@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const routes = require('../routes');
 const config = require('../config');
-const session = require('express-session')
+const session = require('express-session');
 
 module.exports = (app) => {
 
@@ -10,7 +10,8 @@ module.exports = (app) => {
 	app.head('/status', (req, res) => { res.status(200).end(); });
 	app.enable('trust proxy');
 	app.set('views', path.join(__dirname + '\\..\\', 'views'));
-
+	app.set('view engine', 'ejs');
+	
 	app.use(session({
 		name: 'sid',
 		resave: false,
@@ -32,11 +33,14 @@ module.exports = (app) => {
 		res.header('cache-control', 'no-store, no-cache, must-revalidate');
 		next();
 	})
-
 	app.use(express.static('public'));
-
 	app.use((req, res, next) =>{
 		if (req.session.user) res.locals.user = req.session.user;
+		next();
+	})
+
+	app.use((req, res, next) => {
+		if (req.method != 'POST') req.session.lastUrl = req.url;
 		next();
 	})
 

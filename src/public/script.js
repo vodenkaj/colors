@@ -3,8 +3,17 @@ const modalContainer = document.querySelector('.modal-container');
 const navBar = document.querySelector('.tools');
 let lastExtendButton, lastShade, lastModul, currentColors = [];
 window.onload = () => {
-    for (var i = 0; i < 3; i++) addColor();
+    const newUrl = [];
+    const path = window.location.pathname.slice(1).replace(/-/g, '');
+    window.history.replaceState({}, null, '');
+    if (path == 'generator') for (var i = 0; i < 3; i++) addColor();
+    else {
+        const colorsHEX = path.match(/.{1,6}/g).reverse();
+        const n = colorsHEX.length;
+        for (let i = 0; i < n; i++) addColor(null, -1, colorsHEX);
+    }
 }
+
 document.onkeydown = createColors;
 colorPicker.addEventListener('mouseover', function(e) {
     if (e.target && (e.target.className == 'side-div right' || e.target.className == 'add-color right')) {
@@ -70,7 +79,6 @@ function isUserLoggedIn(){
         modalContainer.children[0].children[3].style.visibility = 'visible';
         colorPicker.style.pointerEvents = 'none';
         document.getElementById('color-data').value = JSON.stringify(currentColors);
-        console.log(document.getElementById('color-data').value);
     }
     else {
         signIn();
@@ -188,7 +196,6 @@ function exportToASE() {
 function convertStringToUTF8ByteArray(str) {
     const final = new Uint16Array(str.length);
     const arr = final.map((byte, i)=> str.charCodeAt(i));
-
     return arr;
 }
 
@@ -243,6 +250,10 @@ function rgbToCSS(rgb, name) {
     return `--${name}: ${rgb};`;
 }
 
+function getColorsFromURL(colorsHEX){
+    for (let i = 0; i < colorsHEX.length; i++) addColor();
+}
+
 function createShades(rootDiv) {
     const baseColor = rootDiv.parentElement.style.backgroundColor.replace(/[^0-9,]/g, '').split(',').map(x => +x);
     let color, rgb, grayScale;
@@ -272,23 +283,28 @@ function createColors(e = null) {
         if (!pickers[i].children[5].children[0].children[2].classList.contains('locked')) {
             generateColor(pickers[i]);
             createShades(pickers[i].children[0]);
-            let color = pickers[i].children[5].children[1].innerText;
+            const color = pickers[i].children[5].children[1].innerText;
             if (i > currentColors.length) currentColors.push('#'+color)
             else currentColors[i] = '#'+color;
         }
     }
 }
 
-function generateColor(element) {
-    const color = "#000000".replace(/0/g, function() {
-        return (~~(Math.random() * 16)).toString(16);
-    }).toUpperCase();
+function generateColor(element, customColors=null) {
+    let color;
+    if (!customColors) {
+       color = "#000000".replace(/0/g, function() {
+            return (~~(Math.random() * 16)).toString(16);
+        }).toUpperCase();
+    }
+    else color = '#' + customColors.pop()
     element.children[1].value = color;
     element.children[5].children[1].innerText = color.slice(1);
     element.style.background = color;
     rgb = HexToRGB(parseInt(color.slice(1), 16));
     if (getGrayScale(rgb) > 0.5) element.children[5].style.color = '#0F2235';
     else element.children[5].style.color = 'white';
+    updateHTML();
 }
 
 function generateShades(r, g, b) {
@@ -342,7 +358,7 @@ function lockColor(e) {
     }
 }
 
-function addColor(e, insert = -1) {
+function addColor(e, insert = -1, customColors = null) {
     const rootDiv = document.createElement('div');
     rootDiv.classList.add('split');
     const sideDivLeft = document.createElement('div');
@@ -392,10 +408,15 @@ function addColor(e, insert = -1) {
     rootDiv.appendChild(optionsDiv);
     if (insert == 0) colorPicker.insertBefore(rootDiv, e.target.parentElement);
     else if (insert == 1) colorPicker.insertBefore(rootDiv, e.target.parentElement.nextSibling);
-    generateColor(rootDiv);
+    generateColor(rootDiv, customColors);
     adjustWidth();
     createShades(shadesDiv);
-    currentColors.push('#'+colorCode.innerText);
+    updateCurrentColors();
+    updateHTML();
+}
+
+function updateHTML(){
+    window.history.pushState({}, null, currentColors.join('-').replace(/#/g, ''));
 }
 
 function removeColor(e) {
@@ -412,6 +433,13 @@ function adjustWidth() {
     const newWidth = 100 / n;
     for (var i = 0; i < n; i++) {
         colorPicker.children[i].style.width = newWidth + '%';
+    }
+}
+
+function updateCurrentColors(){
+    currentColors = [];
+    for (let i = 0; i < colorPicker.childNodes.length; i++){
+        currentColors.push(RGBToHex(colorPicker.childNodes[i].style.backgroundColor.replace(/[^0-9,]/g, '').split(',').map(x => +x)).toUpperCase());
     }
 }
 

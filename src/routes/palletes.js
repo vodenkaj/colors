@@ -1,5 +1,6 @@
 const express = require('express');
 const Pallete = require('../models/pallete');
+const errors = require('./errors')
 
 module.exports = (app) => {
 	
@@ -8,21 +9,28 @@ module.exports = (app) => {
 	});
 
 	app.post('/save', (req, res, next) =>{
-		if (!req.session.userId || req.body.name.length < 1) return res.render('htmlStatus', {errorCode: '403', errorMessage: 'Forbidden'});
+		if (!req.session.userId || req.body.name.length < 1) return errors.forbidden(res);
 		next();
 	})
 
 	app.post('/save', express.json(), async (req, res) => {
 		const colors = []
 
-		JSON.parse(req.body.data).forEach((hex)=>{
-			colors.push([hex, true]);
-		})
-		
-		const userPallete = new Pallete({
-			colors: colors
-		})
-		const response = await userPallete.save();
-		res.send(response);
+		try{
+			JSON.parse(req.body.data).forEach((hex)=>{
+			if (!hex.trim().match(/^[#A-Z0-9]*$/)) throw new Error('Invalid character!')
+				colors.push([hex, true]);
+			})
+			
+			const userPallete = new Pallete({
+				colors: colors,
+				creator: req.session.user
+			})
+			const response = await userPallete.save();
+			res.send(response);
+		}
+		catch(err){
+			return errors.invalidData(res);
+		}
 	})
 }
