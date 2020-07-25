@@ -2,11 +2,14 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<script type="text/javascript" src='/script.js' defer></script>
+	<script src="/converters.js"></script>
+	<script src="/modals_scripts.js" defer></script>
+	<script type="text/javascript" src='/generator_scripts.js' defer></script>
 	<script type="text/javascript" src="http://chir.ag/projects/ntc/ntc.js"></script>
 	<title>Pallete Generator</title>
 </head>
 <%- include('layouts/nav'); %>
+<%- include('layouts/modals'); %>
 <header>
 	<a class='tip'>Press space to generate new colors!</a>
 	<nav>
@@ -18,66 +21,5 @@
 </header>
 <body>
 	<div class='picker-container'></div>
-	<!-- Modal Section -->
-	<div class='modal-container'>
-		<div class='bg-modal'>
-			<!-- Export -->
-			<div class='export-content'>
-				<button id='close'></button>
-				<header class='modal-header'>
-					<span>Export as</span>
-				</header>
-				<div class='methods-container'>
-					<a id='css-export'><i>CSS</i></a>
-					<a id='image-export'><i>Image</i></a>
-					<a id='ase-export' download='pallete.ase' role='button'> <i>ASE</i></a>
-					<a id='svg-export'><i>SVG</i></a>
-				</div>
-			</div>
-			<!-- Download -->
-			<div class='download-content'>
-				<button id='close'></button>
-				<header class='modal-header'>
-					<span>CSS</span>
-				</header>
-				<div class='code-container'>
-					<pre><code class='css-content'>
-					</code></pre>
-				</div>
-				<div class='footer'>
-					<a id='download-css' download='pallete.scss' role='button'>Download</a>
-					<a id='copy-css' role='button'>Copy</a>
-				</div>
-			</div>
-			<div class='download-content'>
-				<button id='close'></button>
-				<header class='modal-header'>
-					<span>Image</span>
-				</header>
-				<div class='footer'>
-					<a id='download-image' download='pallete.png' role='button'>Download</a>
-				</div>
-			</div>
-			<!-- Save -->
-			<div class='save-pallete'>
-				<button id='close'></button>
-				<header class='modal-header'>
-					<span>Save</span>
-				</header>
-				<div class='form-container'>
-					<form method='POST' action='/save'>
-						<input id='color-data' type="hidden" name="data">
-						<label>NAME</label>
-						<input type="text" name="name" placeholder="My new pallete" required>
-						<label>TAGS</label>
-						<input type="text" name="tags" placeholder="Tags">
-						<div class='footer'>
-							<input type="submit" value='Save'>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
 </body>
 </html>

@@ -14,7 +14,7 @@ module.exports = (app) => {
 		res.send(pallete);
 	})
 
-	app.get('/ajax/users-palletes', async (req, res) => {
+	app.get('/ajax/user-palletes', async (req, res) => {
 		const colors = await Pallete.find({creator: req.session.user}, 'colors');
 		const pallete = colors.map((color) => {
 			return color.colors;

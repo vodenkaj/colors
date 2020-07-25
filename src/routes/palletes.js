@@ -18,8 +18,8 @@ module.exports = (app) => {
 
 		try{
 			JSON.parse(req.body.data).forEach((hex)=>{
-			if (!hex.trim().match(/^[#A-Z0-9]*$/)) throw new Error('Invalid character!')
-				colors.push([hex, true]);
+			if (!hex[0].trim().match(/^[#A-Z0-9]*$/)) throw new Error('Invalid character!')
+				colors.push([hex[0], hex[1]]);
 			})
 			
 			const userPallete = new Pallete({

@@ -29,6 +29,10 @@ header {
 	left: 0;
 }
 
+.main-header a {
+	cursor: pointer;
+}
+
 pre {
     color: #666;
     page-break-inside: avoid;
@@ -44,7 +48,6 @@ pre {
 
 header a {
 	margin-left: 10px;
-	cursor: pointer;
 	color: #5A6B69;
 	text-decoration: none;
 }
@@ -175,11 +178,14 @@ header li {
 	height: 30px;
 	background: white;
 	bottom: 0;
-
 }
 
 .downloads i {
 	padding-left: 10px;
+}
+
+.downloads #info {
+	clear: both;
 }
 
 #info { 
@@ -194,13 +200,13 @@ header li {
 	content: '\f141';
 }
 
-.pallete-container a {
+.pallete-container #info {
 	align-content: center;
 	text-align: center;
 
 }
 
-.pallete-container a:hover .content {
+.pallete-container #info:hover .content {
 	visibility: visible;
 	opacity:1;
 	clear: both;
@@ -223,16 +229,21 @@ header li {
 	transform: translate(-50%, 0);
 }
 
-.pallete-container a .content ul {
+.pallete-container #info .content ul {
 	font-size: 15px;
 	padding: 0;
 	margin: 10px;
-	list-style-type: none;
 	text-align: center;
 	cursor: pointer;
+	list-style: none;
 }
 .content li {
 	margin: 5px;
+}
+
+.content a {
+	color: #5A6B69;
+	text-decoration: none;
 }
 
 .shadow-splitter {
@@ -245,7 +256,7 @@ header li {
 	font-family: 'fontawesome';
 }
 
-.pallete-container a .content:after {
+.pallete-container #info .content:after {
 	content: '';
 	box-shadow: 2px 2px 0px 0px rgba(41,41,41,.2);
 	position: absolute;
@@ -261,6 +272,7 @@ header li {
 
 .tools{
 	list-style: none;
+	cursor: pointer;
 }
 
 .tools i.icon-holder:before {

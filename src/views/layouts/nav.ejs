@@ -10,9 +10,9 @@
 		<ul>
 			<li><a href='/generator'><i><span>Generate</span></i></a></li>
 			<li><a href='/palletes'><i><span>Explore</span></i></a></li>
-			<li><a>|</a></li>
+			<li><i>|</i></li>
 			<% if (typeof user != 'undefined') { %>
-				<li><a id='user'><i><span><%= user %></span></i></a></li>
+				<li><a id='user' href='/profile'><i><span><%= user %></span></i></a></li>
 			<% } else { %>
 				<li><a id='sign-in'><i><span>Sign in</span></i></a></li>
 				<li><a id='sign-up'><i><span>Sign up</span></i></a></li>
